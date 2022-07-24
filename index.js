@@ -329,7 +329,7 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
             if (budy.match(/(chat.whatsapp.com)/gi)) {
         	linkgrup = await alpha.groupInviteCode(m.chat)
 	    	if (budy.includes(linkgrup)) return
-        	reply(lang.KickAh(groupMetadata.subject)).then(async res => 
+        	reply(`「 *LINK GROUP TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group ${groupMetadata.subject}`).then(async res => 
         	await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
         }
