@@ -349,12 +349,12 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
         	reply(`「 *KATALOG TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
-		} else if (m.mtype === 'locationMessage') {
+		/*} else if (m.mtype === 'locationMessage') { // Lokasi biasa | rekomendasi off
         	reply(`「 *VIRLOK TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
-			alpha.updateBlockStatus(sender, 'block')
+			alpha.updateBlockStatus(sender, 'block')*/
 		/*} else if (m.mtype === 'liveLocationMessage') {
-        	reply(`「 *KATALOG TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
+        	reply(`「 *VIRLOK TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')*/
 		} else if (m.mtype === 'documentMessage') {
