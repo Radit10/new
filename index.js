@@ -84,6 +84,13 @@ const tebakkimia = db.data.game.tebakkimia = []
 const tebaklirik = db.data.game.tebaklirik = []
 const tebaktebakan = db.data.game.tebaktebakan = []
 
+//punya gw, File Sticker
+heker1 = fs.readFileSync("./storage/sticker/heker1.png")
+heker2 = fs.readFileSync("./storage/sticker/heker2.png")
+heker3 = fs.readFileSync("./storage/sticker/heker3.png")
+heker4 = fs.readFileSync("./storage/sticker/heker4.png")
+var HekerList = [heker1,heker2,heker3,heker4]
+var heker = HekerList[Math.floor(Math.random() * HekerList.length)];
 
 module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
     try {
@@ -204,6 +211,9 @@ module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
 		}
 		const sendReact = async (emoji) => { //await sendReact("📋")
             return alpha.sendMessage(m.chat, { react: { text: emoji, key: m.key }})
+		}
+		const sendSticker = async (file) => {
+		    return alpha.sendImageAsSticker(m.chat, file, m, { packname: global.packname, author: global.author })
 		}
 		const randomArr = (arr = []) => {
             return arr[Math.floor(Math.random() * arr.length)]
@@ -336,13 +346,13 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
      }
 		
 		// Anti Virus \\
-	  if (m.isGroup && !m.key.fromMe && db.data.chats[m.chat].antivirus && !isCreator && !isGroupAdmins && !isGroupOwner){		    	    
+	  //if (m.isGroup && !m.key.fromMe && db.data.chats[m.chat].antivirus && !isCreator && !isGroupAdmins && !isGroupOwner){		    	    
 	    if (budy.match(/(๒|๑|৭|ด|ผ|ท|ง|า|ۿ|๕|๘|٩|๓|๗|๙|৫|ꫂ|闦|ᡃ⃟⃟|i⃟|ᡃ⃢⃢|ᡃ⃝|⃢⃝⃟⃕⃕|ℨ|᠀|📄|ı|ạ|ẉ|k̴̎|ɑ|ℰ|ℛ|Ø|✘|█|▒|❚|𝀲|ࣧ|ࣻ|ۜ|ࣨ|ۧ|҈|᳕|᥋|২|อ|เ|ม|ล|ꭙ|Ȣ|৪|໑|๗|𖣔|ꪶ|ꫂ|࿋|ℭ|ム|ℕ|⫷|●|⫸|ཌྷ|្|ϟ|➊|㙾|㚗|0000000|1111111|7777777|8888888|9999999)/gi)) {
         	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
         	//alpha.sendMessage(m.chat, { sticker: fs.readFileSync("./storage/sticker/heker.webp") }, { quoted: m })
-        	alpha.sendImageAsSticker(m.chat, fs.readFileSync("./storage/sticker/heker.png"), m, { packname: global.packname, author: global.author }).then(async res =>
+        	sendSticker(heker).then(async res =>
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
-			alpha.updateBlockStatus(sender, 'block')
+			//alpha.updateBlockStatus(sender, 'block')
 	    } else if (m.mtype === 'productMessage') {
         	reply(`「 *SLAYER TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
@@ -380,11 +390,12 @@ alpha.relayMessage(jid, order.message, { messageId: order.key.id})
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')*/
 	    } else if (budy.length > 1000) {
-        	reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`).then(async res => 
+        	//reply(`「 *VIRTEX TERDETEKSI* 」\n\nKamu akan dikeluarkan dari group\n*${groupMetadata.subject}*`)
+        	sendSticker("./storage/sticker/bocahheker.png").then(async res => 
 			await alpha.groupParticipantsUpdate(m.chat, [sender], 'remove'))
 			alpha.updateBlockStatus(sender, 'block')
         }
-     }
+     
      
         // Anti Spam \\
 	    if (!m.isGroup && !m.key.fromMe && !isCreator){
